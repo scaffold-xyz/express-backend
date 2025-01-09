@@ -1,7 +1,7 @@
 {
-  "name": "engage-ai",
+  "name": "express-server",
   "version": "1.0.0",
-  "description": "grow ur socials with engage-ai",
+  "description": "scaffold for express server",
   "main": "./server/server.ts",
   "scripts": {
     "start": "node dist/server/server.js",
@@ -17,7 +17,6 @@
     "express": "^4.21.2",
     "express-rate-limit": "^7.4.1",
     "http-status-codes": "^2.3.0",
-    "openai": "^4.76.2",
     "zod": "^3.24.1"
   },
   "devDependencies": {
