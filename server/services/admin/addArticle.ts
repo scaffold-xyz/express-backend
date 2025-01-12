@@ -1,17 +1,37 @@
 // add article to database
 // use zod to validate the article
 // use drizzle to add the article to the database
-import type { InferAddArticleSchema } from "../../zod/addArticle";
+import type { ArticleInsertSchema } from "../../db/zodSchemaAndTypes";
+import { createArticle } from "../../db/queries/articles";
 
 export const addArticle = async (
-  article: InferAddArticleSchema
+  article: ArticleInsertSchema
 ): Promise<{
-  data: InferAddArticleSchema | null;
+  data: ArticleInsertSchema | null;
   message: string;
   error: any;
 }> => {
-  console.log("addArticle", article);
-  return { data: null, message: "Article added", error: "" };
+  try {
+    // Create article in database
+    await createArticle({
+      ...article,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    return {
+      data: article,
+      message: "Article successfully added",
+      error: null,
+    };
+  } catch (error) {
+    console.error("Error adding article:", error);
+    return {
+      data: null,
+      message: "Failed to add article",
+      error: error,
+    };
+  }
 };
 
 export default addArticle;
